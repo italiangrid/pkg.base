@@ -1,0 +1,11 @@
+FROM  italiangrid/build:centos6
+
+ADD Makefile /home/build
+RUN mkdir /packages && chown -R build:build /packages
+WORKDIR /home/build
+
+VOLUME /packages
+
+ENV BUILD_PLATFORM centos6
+
+CMD /bin/bash -l -c make

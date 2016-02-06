@@ -1,0 +1,11 @@
+FROM  italiangrid/build:centos5
+
+ADD Makefile /home/build
+RUN mkdir /packages && chown -R build:build /packages
+WORKDIR /home/build
+
+VOLUME /packages
+
+ENV BUILD_PLATFORM centos5
+
+CMD /bin/bash -l -c make
