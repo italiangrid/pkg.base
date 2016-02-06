@@ -29,7 +29,7 @@ pkg_git=$(PKG_REPO)
 pkg_tag=develop
 
 ifdef PKG_TAG
-pgk_tag=$(PKG_TAG)
+pkg_tag=$(PKG_TAG)
 endif
 
 pkg_stage_dir=/packages/$(BUILD_PLATFORM)
@@ -41,7 +41,7 @@ endif
 spec=$(pkg_dir)/$(name)/rpm/$(name).spec
 
 ifdef PKG_SPEC_FILE
-spec=$(PKG_SPEC_FILE)
+spec=$(pkg_dir)/$(PKG_SPEC_FILE)
 endif
 
 .PHONY: clean rpm print-info
