@@ -1,6 +1,13 @@
-FROM  italiangrid/build:centos7
+FROM  centos:centos7
 
 ENV BUILD_PLATFORM centos7
+
+ADD centos7/setup.sh centos7/settings.xml /
+RUN chmod +x /setup.sh
+ADD centos7/apache-maven.repo /etc/yum.repos.d/
+
+RUN /setup.sh
+
 ADD Makefile build-stage-area-repo-file.sh update-stage-area.sh /home/build/
 
 RUN sh /home/build/build-stage-area-repo-file.sh && \
@@ -10,6 +17,7 @@ RUN sh /home/build/build-stage-area-repo-file.sh && \
 
 WORKDIR /home/build
 
+VOLUME /m2-repository
 VOLUME /packages
 VOLUME /stage-area
 
