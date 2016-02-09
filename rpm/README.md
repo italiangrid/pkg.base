@@ -112,4 +112,4 @@ set with the `PKG_PREBUILD_SCRIPT`.
 
 ## Examples
 
-TBD
+- [Argus integrated packaging](https://github.com/argus-authz/pkg.argus)
