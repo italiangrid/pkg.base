@@ -1,11 +1,16 @@
 FROM  italiangrid/build:centos7
 
-ADD Makefile /home/build
-RUN mkdir /packages && chown -R build:build /packages
+ENV BUILD_PLATFORM centos7
+ADD Makefile build-stage-area-repo-file.sh update-stage-area.sh /home/build/
+
+RUN sh /home/build/build-stage-area-repo-file.sh && \
+  mkdir /packages && chown -R build:build /packages && \
+  mkdir -p /stage-area/$BUILD_PLATFORM && createrepo /stage-area/$BUILD_PLATFORM && \
+  chown -R build:build /stage-area
+
 WORKDIR /home/build
 
 VOLUME /packages
-
-ENV BUILD_PLATFORM centos7
+VOLUME /stage-area
 
 CMD /bin/bash -l -c make
