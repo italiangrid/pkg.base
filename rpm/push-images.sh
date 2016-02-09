@@ -2,12 +2,15 @@
 set -ex
 tags=${tags:-"centos5 centos6 centos7"}
 
-if [ -z "${DOCKER_REGISTRY_HOST}" ]; then
-  echo "Please define the DOCKER_REGISTRY_HOST environment variable before running this script."
-  exit 1
+if [ -n "${DOCKER_REGISTRY_HOST}" ]; then
+  for t in ${tags}; do
+    docker tag -f  italiangrid/pkg.base:${t} ${DOCKER_REGISTRY_HOST}/italiangrid/pkg.base:${t}
+    docker push ${DOCKER_REGISTRY_HOST}/italiangrid/pkg.base:${t}
+  done
 fi
 
-for t in ${tags}; do
-  docker tag -f  italiangrid/pkg.base:${t} ${DOCKER_REGISTRY_HOST}/italiangrid/pkg.base:${t}
-  docker push ${DOCKER_REGISTRY_HOST}/italiangrid/pkg.base:${t}
-done
+if [ -n "${PUSH_TO_DOCKERHUB}" ]; then
+  for t in ${tags}; do
+    docker push italiangrid/pkg.base:${t}
+  done
+fi

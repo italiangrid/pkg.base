@@ -19,6 +19,11 @@ yum -y install which make createrepo \
 # Align it with centos7 naming
 sed -i -e "s#^%dist .el5#%dist .el5.centos#" /etc/rpm/macros.dist
 
+# Disable require tty which prevents to run sudo naturally
+# from jenkins, where we have no tty
+sed -i -e "/Defaults    requiretty/d" /etc/sudoers
+sed -i -e "/Defaults   \!visiblepw/d" /etc/sudoers
+
 update-alternatives --set java /usr/lib/jvm/jre-1.7.0-openjdk.x86_64/bin/java
 update-alternatives --set javac /usr/lib/jvm/java-1.7.0-openjdk.x86_64/bin/javac
 

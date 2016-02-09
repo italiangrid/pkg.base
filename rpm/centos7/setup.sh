@@ -16,6 +16,11 @@ yum -y install make createrepo \
   redhat-rpm-config buildsys-macros \
   autoconf automake cmake gcc-c++ libtool sudo
 
+# Disable require tty which prevents to run sudo naturally
+# from jenkins, where we have no tty
+sed -i -e "/Defaults    requiretty/d" /etc/sudoers
+sed -i -e "/Defaults   \!visiblepw/d" /etc/sudoers
+
 java -version
 javac -version
 mvn --version
