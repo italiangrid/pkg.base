@@ -95,7 +95,7 @@ prepare-sources: fetch-sources
 	mv $(source_dir)/$(name)/$(tarball_name).gz $(source_dir)/$(tarball_name).gz
 
 pre-build:
-	if [ -r "$(prebuild_script)" ]; then pwd && sudo yum clean expire-cache && sudo -E bash -c "sh $(prebuild_script)"; fi
+	if [ -r "$(prebuild_script)" ]; then pwd && sudo yum clean expire-cache && sudo -E bash -c "/bin/bash -ex $(prebuild_script)"; fi
 
 prepare-spec: fetch-packaging prepare-sources pre-build
 
@@ -108,7 +108,7 @@ prepare-rpm: prepare-spec
 	cp $(source_dir)/$(tarball_name).gz $(rpmbuild_dir)/SOURCES/$(tarball_name).gz
 
 setup-stage-area:
-	sudo -E bash -c 'sh setup-stage-area.sh'
+	sudo -E bash -c '/bin/bash -ex setup-stage-area.sh'
 
 build-rpm: prepare-rpm
 ifndef BUILD_NUMBER
