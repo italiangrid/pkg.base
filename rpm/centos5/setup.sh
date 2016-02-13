@@ -16,6 +16,11 @@ yum -y install which make createrepo \
   redhat-rpm-config buildsys-macros \
   autoconf automake cmake gcc-c++ libtool sudo
 
+# For some reason centos5 apache-maven package does
+# not set a suitable link for mvn executable, and
+# this makes rpm build fail
+ln -s /usr/share/apache-maven/bin/mvn /usr/bin/mvn
+
 # Align it with centos7 naming
 sed -i -e "s#^%dist .el5#%dist .el5.centos#" /etc/rpm/macros.dist
 
