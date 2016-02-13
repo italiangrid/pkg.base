@@ -7,11 +7,11 @@ fi
 
 set +a
 
+# Print env
+env
+
 # Setup stage area
 make setup-stage-area
-
-# Run pre-build script
-make pre-build
 
 # Run build
 make

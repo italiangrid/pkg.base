@@ -1,3 +1,5 @@
+SHELL=/bin/bash
+
 ifndef BUILD_NAME
 $(error BUILD_NAME is not defined.)
 endif
@@ -40,6 +42,10 @@ endif
 
 stage_dir=/stage-area/$(BUILD_PLATFORM)
 
+ifdef PKG_STAGE_DIR
+stage_dir=$(PKG_STAGE_DIR)
+endif
+
 spec=$(pkg_dir)/$(name)/rpm/$(name).spec
 
 ifdef PKG_SPEC_FILE
@@ -66,7 +72,6 @@ tarball_name=$(name)-$(TARBALL_VERSION).tar
 tarball_prefix=$(name)-$(TARBALL_VERSION)
 endif
 
-
 .PHONY: clean rpm print-info
 
 all: rpm
@@ -85,15 +90,14 @@ fetch-sources: print-info
 	cd $(source_dir)/$(name) && git checkout $(tag)
 	cd $(source_dir)/$(name) && git archive --format=tar --prefix=$(tarball_prefix)/ $(tag) > $(tarball_name)
 
-prepare-sources.local:
-
-prepare-sources: fetch-sources prepare-sources.local
+prepare-sources: fetch-sources
 	cd $(source_dir) && gzip $(name)/$(tarball_name)
 	mv $(source_dir)/$(name)/$(tarball_name).gz $(source_dir)/$(tarball_name).gz
 
-prepare-spec.local:
+pre-build:
+	if [ -r "$(prebuild_script)" ]; then pwd && sudo yum clean expire-cache && sudo -E bash -c "sh $(prebuild_script)"; fi
 
-prepare-spec: fetch-packaging prepare-sources prepare-spec.local
+prepare-spec: fetch-packaging prepare-sources pre-build
 
 prepare-rpm: prepare-spec
 	mkdir -p  $(rpmbuild_dir)/BUILD \
@@ -103,8 +107,10 @@ prepare-rpm: prepare-spec
 		$(rpmbuild_dir)/SRPMS
 	cp $(source_dir)/$(tarball_name).gz $(rpmbuild_dir)/SOURCES/$(tarball_name).gz
 
+setup-stage-area:
+	sudo -E bash -c 'sh setup-stage-area.sh'
+
 build-rpm: prepare-rpm
-	if [ -r "$(prebuild_script)" ]; then echo "Running prebuild script" && sh $(prebuild_script); fi
 ifndef BUILD_NUMBER
 	rpmbuild --nodeps -v -ba $(spec) --define "_topdir $(rpmbuild_dir)"
 else
