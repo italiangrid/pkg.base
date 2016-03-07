@@ -22,7 +22,7 @@ yum -y install which make createrepo \
 ln -s /usr/share/apache-maven/bin/mvn /usr/bin/mvn
 
 # Align it with centos7 naming
-sed -i -e "s#^%dist .el5#%dist .el5.centos#" /etc/rpm/macros.dist
+# sed -i -e "s#^%dist .el5#%dist .el5.centos#" /etc/rpm/macros.dist
 
 # Disable require tty which prevents to run sudo naturally
 # from jenkins, where we have no tty
