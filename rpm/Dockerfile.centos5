@@ -4,7 +4,8 @@ ENV BUILD_PLATFORM centos5
 
 ADD centos5/setup.sh centos5/settings.xml /
 RUN chmod +x /setup.sh
-ADD centos5/apache-maven.repo /etc/yum.repos.d/
+ADD centos5/apache-maven.repo /centos5/CentOS-Base.repo centos5/*.local.mirror /etc/yum.repos.d/
+ADD centos5/epel.repo /
 
 RUN /setup.sh
 
