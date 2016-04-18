@@ -4,8 +4,9 @@ ENV BUILD_PLATFORM centos6
 
 ADD centos6/setup.sh centos6/settings.xml /
 RUN chmod +x /setup.sh
-ADD centos6/apache-maven.repo /etc/yum.repos.d/
-ADD centos6/gpfs.repo /etc/yum.repos.d/
+
+ADD centos6/apache-maven.repo /centos6/gpfs.repo /centos6/CentOS-Base.repo centos6/*.local.mirror /etc/yum.repos.d/
+ADD centos6/epel.repo /
 
 RUN /setup.sh
 
