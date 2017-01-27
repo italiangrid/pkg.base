@@ -1,6 +1,6 @@
 #!/bin/bash
 set -ex
-tags=${tags:-"centos5 centos6 centos7"}
+tags=${tags:-"centos5 centos6 centos7 rawhide"}
 
 if [ -n "${DOCKER_REGISTRY_HOST}" ]; then
   for t in ${tags}; do
