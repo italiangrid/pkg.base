@@ -2,7 +2,7 @@
 
 CENTOS5_RELEASE=5
 CENTOS6_RELEASE=6
-CENTOS7_RELEASE=7.2.1511
+CENTOS7_RELEASE=7
 
 ## CENTOS 5
 for i in os updates extras centosplus contrib fasttrack; do sed -e "s/##REL##/${CENTOS5_RELEASE}/" -e "s/##REPO##/$i/" centos-mirror.template > centos5/$i.local.mirror; done
