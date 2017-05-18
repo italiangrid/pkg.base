@@ -15,31 +15,33 @@ pipeline {
       agent { label 'generic' }
       steps {
         git 'https://github.com/italiangrid/pkg.base'
-        stash name: "source", inlude: "./*"
+        stash name: "source", include: "./*"
       }
     }
     
     stage('build images'){
-      parallel(
-        "rpms": {
-          node('docker'){
-            unstash "source"
-            dir('rpm') {
-              sh "sh build-images.sh"
-              sh "sh push-images.sh"
+      steps {
+        parallel(
+          "rpms": {
+            node('docker'){
+              unstash "source"
+              dir('rpm') {
+                sh "sh build-images.sh"
+                sh "sh push-images.sh"
+              }
+            }
+          },
+          "debs": {
+            node('docker'){
+              unstash "source"
+              dir('deb'){
+                sh "sh build-images.sh"
+                sh "sh push-images.sh"
+              }
             }
           }
-        },
-        "debs": {
-          node('docker'){
-            unstash "source"
-            dir('deb'){
-              sh "sh build-images.sh"
-              sh "sh push-images.sh"
-            }
-          }
-        }
-        )
+          )
+      }
     }
   }
   
