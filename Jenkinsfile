@@ -15,7 +15,7 @@ pipeline {
       agent { label 'generic' }
       steps {
         git 'https://github.com/italiangrid/pkg.base'
-        stash name: "source", include: "./*"
+        stash name: "source", includes: "./*"
       }
     }
     
