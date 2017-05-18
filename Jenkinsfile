@@ -22,16 +22,40 @@ pipeline {
     stage('build images'){
       steps {
         parallel(
-          "rpms": {
+          "centos6": {
             node('docker'){
               unstash "source"
               dir('rpm') {
-                sh "sh build-images.sh"
-                sh "sh push-images.sh"
+                withEnv(["tags=centos6"]){
+                  sh "sh build-images.sh"
+                  sh "sh push-images.sh"
+                }
               }
             }
           },
-          "debs": {
+          "centos7": {
+            node('docker'){
+              unstash "source"
+              dir('rpm') {
+                withEnv(["tags=centos7"]){
+                  sh "sh build-images.sh"
+                  sh "sh push-images.sh"
+                }
+              }
+            }
+          },
+          "rawhide": {
+            node('docker'){
+              unstash "source"
+              dir('rpm') {
+                withEnv(["tags=rawhide"]){
+                  sh "sh build-images.sh"
+                  sh "sh push-images.sh"
+                }
+              }
+            }
+          },
+          "ubuntu1604": {
             node('docker'){
               unstash "source"
               dir('deb'){
