@@ -14,8 +14,8 @@ pipeline {
     stage('prepare'){
       agent { label 'generic' }
       steps {
-        git 'https://github.com/italiangrid/pkg.base'
-        stash name: "source", includes: "./*"
+        checkout scm
+        stash name: "source", includes: "**"
       }
     }
     
