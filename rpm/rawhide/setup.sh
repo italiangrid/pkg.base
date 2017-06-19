@@ -7,6 +7,8 @@ BUILD_USER_HOME=${BUILD_USER_HOME:-/home/${BUILD_USER}}
 
 dnf clean all
 
+dnf update -y
+
 dnf -y install make createrepo \
   which wget rpm-build git tar maven java-1.8.0-openjdk-devel \
   redhat-rpm-config \
