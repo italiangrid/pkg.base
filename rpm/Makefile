@@ -46,6 +46,12 @@ ifdef PKG_STAGE_DIR
 stage_dir=$(PKG_STAGE_DIR)
 endif
 
+stage_dir_srpms=/stage-area-srpms/$(BUILD_PLATFORM)
+
+ifdef PKG_STAGE_DIR_SRPMS
+stage_dir_srpms=$(PKG_STAGE_DIR_SRPMS)
+endif
+
 spec=$(pkg_dir)/$(name)/rpm/$(name).spec
 
 ifdef PKG_SPEC_FILE
@@ -124,16 +130,16 @@ export-rpm: build-rpm
 
 stage-rpm: export-rpm
 ifdef PKG_STAGE_RPMS
-	mkdir -p $(stage_dir)/rpms
-	find $(pkg_packages_dir)/RPMS -name $(BUILD_NAME)-*.rpm -exec cp {} $(stage_dir)/rpms \;
-	createrepo ${stage_dir}/rpms
+	mkdir -p $(stage_dir)
+	find $(pkg_packages_dir)/RPMS -name $(BUILD_NAME)-*.rpm -exec cp {} $(stage_dir) \;
+	createrepo ${stage_dir}
 else
 	echo "PKG_STAGE_RPMS not defined, do nothing..."
 endif
 ifdef PKG_STAGE_SRPMS
-	mkdir -p $(stage_dir)/srpms
-	find $(pkg_packages_dir)/SRPMS -name $(BUILD_NAME)-*.rpm -exec cp {} $(stage_dir)/srpms \;
-	createrepo ${stage_dir}/srpms
+	mkdir -p $(stage_dir_srpms)
+	find $(pkg_packages_dir)/SRPMS -name $(BUILD_NAME)-*.rpm -exec cp {} $(stage_dir_srpms) \;
+	createrepo ${stage_dir_srpms}
 else
 	echo "PKG_STAGE_SRPMS not defined, do nothing..."
 endif
