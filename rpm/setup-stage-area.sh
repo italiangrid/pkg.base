@@ -10,17 +10,17 @@ fi
 cat << EOF > /etc/yum.repos.d/build-stage-area.repo
 [build-stage-area]
 name=build-stage-area
-baseurl=file://${stage_area_dir}
+baseurl=file://${stage_area_dir}/rpms
 protect=1
 enabled=1
 priority=1
 gpgcheck=0
 EOF
 
-mkdir -p ${stage_area_dir}
+mkdir -p ${stage_area_dir}/rpms
 
 if [ ! -d "${stage_area_dir}/repodata" ]; then
-  createrepo ${stage_area_dir}
+  createrepo ${stage_area_dir}/rpms
   chown -R build:build ${stage_area_dir}
 fi
 

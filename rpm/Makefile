@@ -124,11 +124,18 @@ export-rpm: build-rpm
 
 stage-rpm: export-rpm
 ifdef PKG_STAGE_RPMS
-	mkdir -p $(stage_dir)
-	find $(pkg_packages_dir)/RPMS -name $(BUILD_NAME)-*.rpm -exec cp {} $(stage_dir) \;
-	createrepo ${stage_dir}
+	mkdir -p $(stage_dir)/rpms
+	find $(pkg_packages_dir)/RPMS -name $(BUILD_NAME)-*.rpm -exec cp {} $(stage_dir)/rpms \;
+	createrepo ${stage_dir}/rpms
 else
 	echo "PKG_STAGE_RPMS not defined, do nothing..."
+endif
+ifdef PKG_STAGE_SRPMS
+	mkdir -p $(stage_dir)/srpms
+	find $(pkg_packages_dir)/SRPMS -name $(BUILD_NAME)-*.rpm -exec cp {} $(stage_dir)/srpms \;
+	createrepo ${stage_dir}/srpms
+else
+	echo "PKG_STAGE_SRPMS not defined, do nothing..."
 endif
 
 rpm: stage-rpm
