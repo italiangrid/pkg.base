@@ -5,13 +5,18 @@ BUILD_USER=${BUILD_USER:-build}
 BUILD_USER_UID=${BUILD_USER_UID:-1234}
 BUILD_USER_HOME=${BUILD_USER_HOME:-/home/${BUILD_USER}}
 
-dnf clean all
+# Use only GARR and CERN mirrors
+echo "include_only=.garr.it,.cern.ch" >> /etc/yum/pluginconf.d/fastestmirror.conf
 
-dnf update -y
+yum clean all
+yum install -y hostname epel-release
 
-dnf -y install make createrepo \
-  which wget rpm-build git tar maven java-1.8.0-openjdk-devel \
-  redhat-rpm-config \
+mv /epel.repo /etc/yum.repos.d/
+
+yum -y update
+yum -y install make createrepo \
+  which wget rpm-build git tar apache-maven java-1.8.0-openjdk-devel \
+  redhat-rpm-config buildsys-macros \
   autoconf automake cmake gcc-c++ libtool sudo
 
 # Disable require tty which prevents to run sudo naturally
@@ -23,8 +28,8 @@ java -version
 javac -version
 mvn --version
 
-# update-alternatives --set java $(realpath /usr/lib/jvm/java-1.8.0-openjdk/jre/bin/java)
-# update-alternatives --set javac $(realpath /usr/lib/jvm/java-1.8.0-openjdk/bin/javac)
+update-alternatives --set java $(realpath /usr/lib/jvm/java-1.8.0-openjdk/jre/bin/java)
+update-alternatives --set javac $(realpath /usr/lib/jvm/java-1.8.0-openjdk/bin/javac)
 
 # Add build user to the sudoers
 echo '%wheel ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
@@ -36,4 +41,4 @@ cp /settings.xml ${BUILD_USER_HOME}/.m2
 mkdir /m2-repository
 
 chown -R ${BUILD_USER}:${BUILD_USER} ${BUILD_USER_HOME} /m2-repository
-dnf clean all
+yum clean all
