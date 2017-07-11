@@ -24,3 +24,17 @@ if [ ! -d "${stage_area_dir}/repodata" ]; then
   chown -R build:build ${stage_area_dir}
 fi
 
+# stage area for SRPMS
+
+stage_area_source_dir=/stage-area-source/${BUILD_PLATFORM}
+
+if [ -n "${PKG_STAGE_SOURCE_DIR}" ]; then
+  stage_area_source_dir=${PKG_STAGE_SOURCE_DIR}
+fi
+
+mkdir -p ${stage_area_source_dir}
+
+if [ ! -d "${stage_area_source_dir}/repodata" ]; then
+  createrepo ${stage_area_source_dir}
+  chown -R build:build ${stage_area_source_dir}
+fi

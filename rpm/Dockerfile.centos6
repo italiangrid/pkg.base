@@ -20,6 +20,7 @@ WORKDIR /home/build
 VOLUME /m2-repository
 VOLUME /packages
 VOLUME /stage-area
+VOLUME /stage-area-source
 
 USER build
 
