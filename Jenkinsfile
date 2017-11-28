@@ -1,3 +1,19 @@
+#!/usr/bin/env groovy
+
+def build_image(dir, tags){
+  node('docker'){
+    deleteDir()
+    unstash "source"
+
+    dir("${dir}"){
+      withEnv(["tags=${tags}"]){
+        sh "sh build-images.sh"
+        sh "sh push-images.sh"
+      }
+    }
+  }
+}
+
 pipeline {
   agent none
   
@@ -22,49 +38,17 @@ pipeline {
     stage('build images'){
       steps {
         parallel(
-          "centos6": {
-            node('docker'){
-              unstash "source"
-              dir('rpm') {
-                withEnv(["tags=centos6"]){
-                  sh "sh build-images.sh"
-                  sh "sh push-images.sh"
-                }
-              }
-            }
-          },
-          "centos7": {
-            node('docker'){
-              unstash "source"
-              dir('rpm') {
-                withEnv(["tags=centos7"]){
-                  sh "sh build-images.sh"
-                  sh "sh push-images.sh"
-                }
-              }
-            }
-          },
-          "rawhide": {
-            node('docker'){
-              unstash "source"
-              dir('rpm') {
-                withEnv(["tags=rawhide"]){
-                  sh "sh build-images.sh"
-                  sh "sh push-images.sh"
-                }
-              }
-            }
-          },
-          "ubuntu1604": {
-            node('docker'){
-              unstash "source"
-              dir('deb'){
-                sh "sh build-images.sh"
-                sh "sh push-images.sh"
-              }
-            }
-          }
+          "centos6"   : { build_image('rpm', 'centos6') },
+          "centos7"   : { build_image('rpm', 'centos7') },
+          "rawhide"   : { build_image('rpm', 'rawhide') },
+          "ubuntu1604": { build_image('deb', 'ubuntu1604') },
           )
+      }
+    }
+    
+    stage('result'){
+      steps {
+        script { currentBuild.result = 'SUCCESS' }
       }
     }
   }
@@ -73,6 +57,7 @@ pipeline {
     failure {
       slackSend color: 'danger', message: "${env.JOB_NAME} - #${env.BUILD_NUMBER} Failure (<${env.BUILD_URL}|Open>)"
     }
+    
     changed {
       script{
         if('SUCCESS'.equals(currentBuild.result)) {
