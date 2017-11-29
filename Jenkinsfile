@@ -1,11 +1,11 @@
 #!/usr/bin/env groovy
 
-def build_image(dir, tags){
+def build_image(dirname, tags){
   node('docker'){
     deleteDir()
     unstash "source"
 
-    dir("${dir}"){
+    dir("${dirname}"){
       withEnv(["tags=${tags}"]){
         sh "sh build-images.sh"
         sh "sh push-images.sh"
