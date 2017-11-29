@@ -6,7 +6,7 @@
         <mirror>
             <id>radiohead</id>
             <name>CNAF maven mirror</name>
-            <url>http://radiohead.cnaf.infn.it:8081/nexus/content/groups/public</url>
+            <url>https://repo.cloud.ba.infn.it/repository/maven-public</url>
             <mirrorOf>*</mirrorOf>
         </mirror>
     </mirrors>
