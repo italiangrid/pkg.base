@@ -2,13 +2,15 @@
 
 def build_image(dirname, tags){
   node('docker'){
-    deleteDir()
-    unstash "source"
+    container('docker-runner'){
+      deleteDir()
+      unstash "source"
 
-    dir("${dirname}"){
-      withEnv(["tags=${tags}"]){
-        sh "sh build-images.sh"
-        sh "sh push-images.sh"
+      dir("${dirname}"){
+        withEnv(["tags=${tags}"]){
+          sh "sh build-images.sh"
+          sh "sh push-images.sh"
+        }
       }
     }
   }
@@ -24,6 +26,10 @@ pipeline {
   
   triggers {
     cron('@daily')
+  }
+  
+  environment {
+    DOCKER_REGISTRY_HOST = "${env.DOCKER_REGISTRY_HOST}"
   }
 
   stages {
