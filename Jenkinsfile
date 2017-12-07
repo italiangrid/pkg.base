@@ -7,10 +7,8 @@ def build_image(dirname, tags){
       unstash "source"
 
       dir("${dirname}"){
-        withEnv(["tags=${tags}"]){
-          sh "sh build-images.sh"
-          sh "sh push-images.sh"
-        }
+        sh "tags=${tags} sh build-images.sh"
+        sh "tags=${tags} sh push-images.sh"
       }
     }
   }
