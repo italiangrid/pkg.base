@@ -42,3 +42,8 @@ mkdir /m2-repository
 
 chown -R ${BUILD_USER}:${BUILD_USER} ${BUILD_USER_HOME} /m2-repository
 yum clean all
+
+# Add nexus uploader utility
+
+curl https://raw.githubusercontent.com/marcocaberletti/scripts/master/bin/nexus-assets-upload -o /usr/local/bin/nexus-assets-upload
+chmod +x /usr/local/bin/nexus-assets-upload

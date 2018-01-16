@@ -144,7 +144,14 @@ else
 	echo "PKG_STAGE_SRPMS not defined, do nothing..."
 endif
 
-rpm: stage-rpm
+rpm: upload-rpm
+
+upload-rpm: stage-rpm
+ifdef PKG_UPLOAD_RPMS
+	/bin/bash upload-artifacts.sh
+else
+	echo "PKG_UPLOAD_RPMS not defined."
+endif
 
 clean:
 	rm -rf $(source_dir) $(rpmbuild_dir) $(pkg_dir)
