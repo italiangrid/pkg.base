@@ -78,6 +78,12 @@ tarball_name=$(name)-$(TARBALL_VERSION).tar
 tarball_prefix=$(name)-$(TARBALL_VERSION)
 endif
 
+ifndef RPM_NAME
+rpm_name=$(name)
+else
+rpm_name=$(RPM_NAME)
+endif
+
 .PHONY: clean rpm print-info
 
 all: rpm
@@ -131,14 +137,14 @@ export-rpm: build-rpm
 stage-rpm: export-rpm
 ifdef PKG_STAGE_RPMS
 	mkdir -p $(stage_dir)
-	find $(pkg_packages_dir)/RPMS -name $(BUILD_NAME)-*.rpm -exec cp {} $(stage_dir) \;
+	find $(pkg_packages_dir)/RPMS -name $(rpm_name)-*.rpm -exec cp {} $(stage_dir) \;
 	createrepo ${stage_dir}
 else
 	echo "PKG_STAGE_RPMS not defined, do nothing..."
 endif
 ifdef PKG_STAGE_SRPMS
 	mkdir -p $(stage_source_dir)
-	find $(pkg_packages_dir)/SRPMS -name $(BUILD_NAME)-*.rpm -exec cp {} $(stage_source_dir) \;
+	find $(pkg_packages_dir)/SRPMS -name $(rpm_name)-*.rpm -exec cp {} $(stage_source_dir) \;
 	createrepo ${stage_source_dir}
 else
 	echo "PKG_STAGE_SRPMS not defined, do nothing..."
