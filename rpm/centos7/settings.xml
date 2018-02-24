@@ -6,7 +6,7 @@
         <mirror>
             <id>nexus</id>
             <name>CNAF maven mirror</name>
-            <url>https://repo.cloud.ba.infn.it/repository/maven-public</url>
+            <url>https://repo.cloud.cnaf.infn.it/repository/maven-public</url>
             <mirrorOf>*</mirrorOf>
         </mirror>
     </mirrors>
