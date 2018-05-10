@@ -100,10 +100,14 @@ fetch-sources: print-info
 	@mkdir -p $(source_dir)/$(name)
 	git clone $(git) $(source_dir)/$(name)
 	cd $(source_dir)/$(name) && git checkout $(tag)
-	cd $(source_dir)/$(name) && git archive --format=tar --prefix=$(tarball_prefix)/ $(tag) > $(tarball_name)
 
-prepare-sources: fetch-sources
+create-source-tarball: fetch-sources
+ifndef PKG_SKIP_SOURCE_TARBALL_CREATION
+	cd $(source_dir)/$(name) && git archive --format=tar --prefix=$(tarball_prefix)/ $(tag) > $(tarball_name)
 	cd $(source_dir) && gzip $(name)/$(tarball_name)
+endif
+
+prepare-sources: create-source-tarball
 	mv $(source_dir)/$(name)/$(tarball_name).gz $(source_dir)/$(tarball_name).gz
 
 pre-build:
