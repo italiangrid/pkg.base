@@ -39,13 +39,20 @@ pipeline {
       }
     }
     
-    stage('build images'){
+    stage('build images (1)'){
       steps {
         parallel(
           "centos6"   : { build_image('rpm', 'centos6') },
           "centos7"   : { build_image('rpm', 'centos7') },
-          "rawhide"   : { build_image('rpm', 'rawhide') },
+//          "rawhide"   : { build_image('rpm', 'rawhide') },
           "ubuntu1604": { build_image('deb', 'ubuntu1604') },
+          )
+      }
+    }
+    stage('build images (2)'){
+      steps {
+        parallel(
+          "centos6devtools7"  : { build_image('rpm', 'centos6devtools7') }
           )
       }
     }
