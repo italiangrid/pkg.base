@@ -44,7 +44,7 @@ pipeline {
         parallel(
           "centos6"   : { build_image('rpm', 'centos6') },
           "centos7"   : { build_image('rpm', 'centos7') },
-          "rawhide"   : { build_image('rpm', 'rawhide') },
+//          "rawhide"   : { build_image('rpm', 'rawhide') },
           "ubuntu1604": { build_image('deb', 'ubuntu1604') },
           )
       }
