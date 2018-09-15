@@ -3,7 +3,6 @@ FROM italiangrid/pkg.base:centos6
 USER root
 
 ADD centos6devtools7/setup.sh /docker/
-ADD centos6devtools7/enable-devtoolset.sh /etc/profile.d/
 
 RUN chmod +x /docker/setup.sh
 RUN /docker/setup.sh

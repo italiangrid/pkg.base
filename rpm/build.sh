@@ -13,5 +13,8 @@ env
 # Setup stage area
 make setup-stage-area
 
-# Run build
-make
+if [ -n "${SUDO_BUILD}" ]; then
+  sudo -E /bin/bash -c "make"
+else
+  make
+fi
