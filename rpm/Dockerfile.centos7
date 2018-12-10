@@ -4,6 +4,7 @@ ENV BUILD_PLATFORM centos7
 
 ADD centos7/setup.sh centos7/settings.xml /
 RUN chmod +x /setup.sh
+
 ADD centos7/apache-maven.repo /centos7/gpfs.repo /centos7/CentOS-Base.repo centos7/*.local.mirror /etc/yum.repos.d/
 ADD centos7/epel.repo /
 
@@ -19,6 +20,7 @@ WORKDIR /home/build
 VOLUME /m2-repository
 VOLUME /packages
 VOLUME /stage-area
+VOLUME /stage-area-source
 
 USER build
 
