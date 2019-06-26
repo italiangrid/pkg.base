@@ -1,21 +1,27 @@
 #!/usr/bin/env groovy
+@Library('sd')_
+def kubeLabel = getKubeLabel()
 
 def build_image(dirname, tags){
-  node('docker'){
-    container('docker-runner'){
-      deleteDir()
-      unstash "source"
+    deleteDir()
+    unstash "source"
 
-      dir("${dirname}"){
-        sh "tags=${tags} sh build-images.sh"
-        sh "tags=${tags} sh push-images.sh"
-      }
+    dir("${dirname}"){
+      sh "tags=${tags} sh build-images.sh"
+      sh "tags=${tags} sh push-images.sh"
     }
-  }
 }
 
 pipeline {
-  agent none
+
+  agent {
+      kubernetes {
+          label "${kubeLabel}"
+          cloud 'Kube mwdevel'
+          defaultContainer 'runner'
+          inheritFrom 'ci-template'
+      }
+  }
   
   options {
     buildDiscarder(logRotator(numToKeepStr: '5'))
@@ -32,7 +38,6 @@ pipeline {
 
   stages {
     stage('prepare'){
-      agent { label 'generic' }
       steps {
         checkout scm
         stash name: "source", includes: "**"
@@ -44,15 +49,8 @@ pipeline {
         parallel(
           "centos6"   : { build_image('rpm', 'centos6') },
           "centos7"   : { build_image('rpm', 'centos7') },
-//          "rawhide"   : { build_image('rpm', 'rawhide') },
-          "ubuntu1604": { build_image('deb', 'ubuntu1604') },
-          )
-      }
-    }
-    stage('build images (2)'){
-      steps {
-        parallel(
-          "centos6devtools7"  : { build_image('rpm', 'centos6devtools7') }
+          "centos6devtools7"  : { build_image('rpm', 'centos6devtools7') },
+          "ubuntu1604": { build_image('deb', 'ubuntu1604') }
           )
       }
     }
