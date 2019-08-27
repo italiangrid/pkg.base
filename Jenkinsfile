@@ -1,6 +1,4 @@
 #!/usr/bin/env groovy
-@Library('sd')_
-def kubeLabel = getKubeLabel()
 
 def build_image(dirname, tags){
     deleteDir()
@@ -14,14 +12,7 @@ def build_image(dirname, tags){
 
 pipeline {
 
-  agent {
-      kubernetes {
-          label "${kubeLabel}"
-          cloud 'Kube mwdevel'
-          defaultContainer 'runner'
-          inheritFrom 'ci-template'
-      }
-  }
+  agent { label 'docker' }
   
   options {
     buildDiscarder(logRotator(numToKeepStr: '5'))
@@ -34,6 +25,7 @@ pipeline {
   
   environment {
     DOCKER_REGISTRY_HOST = "${env.DOCKER_REGISTRY_HOST}"
+    PUSH_TO_DOCKERHUB = true
   }
 
   stages {
