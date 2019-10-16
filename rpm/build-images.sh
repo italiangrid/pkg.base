@@ -1,6 +1,6 @@
 #!/bin/bash
 set -ex
-tags=${tags:-"centos6 centos6devtools7 centos7"}
+tags=${tags:-"centos6 centos6devtools7 centos7 centos8"}
 
 for t in ${tags}; do
     docker build \
