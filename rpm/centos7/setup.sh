@@ -45,9 +45,8 @@ yum clean all
 
 # Add nexus uploader utility
 
-curl https://baltig.infn.it/mw-devel/helper-scripts/blob/master/scripts/nexus-assets-upload -o /usr/local/bin/nexus-assets-upload
-
-curl https://baltig.infn.it/mw-devel/helper-scripts/blob/master/scripts/nexus-assets-flat-upload -o /usr/local/bin/nexus-assets-flat-upload
+curl https://baltig.infn.it/mw-devel/helper-scripts/raw/master/scripts/nexus-assets-upload -o /usr/local/bin/nexus-assets-upload
+curl https://baltig.infn.it/mw-devel/helper-scripts/raw/master/scripts/nexus-assets-flat-upload -o /usr/local/bin/nexus-assets-flat-upload
 
 chmod +x /usr/local/bin/nexus-assets-upload
 chmod +x /usr/local/bin/nexus-assets-flat-upload
