@@ -19,5 +19,5 @@ nexus-assets-flat-upload \
     -u ${PKG_NEXUS_USERNAME} \
     -p ${PKG_NEXUS_PASSWORD} \
     -H ${PKG_NEXUS_HOST} \
-    -r ${PKG_NEXUS_REPONAME} \
+    -r ${PKG_NEXUS_REPONAME}/${BUILD_PLATFORM} \
     -d /packages/${BUILD_PLATFORM}/RPMS
