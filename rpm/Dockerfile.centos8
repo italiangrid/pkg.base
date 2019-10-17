@@ -1,6 +1,6 @@
 FROM  centos:centos8
 
-ENV BUILD_PLATFORM centos9
+ENV BUILD_PLATFORM centos8
 
 ADD centos8/setup.sh centos8/settings.xml /
 RUN chmod +x /setup.sh
