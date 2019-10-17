@@ -154,13 +154,20 @@ else
 	echo "PKG_STAGE_SRPMS not defined, do nothing..."
 endif
 
-rpm: upload-rpm
+rpm: stage-rpm
 
-upload-rpm: stage-rpm
-ifdef PKG_UPLOAD_RPMS
-	/bin/bash upload-artifacts.sh
+publish-stage-area:
+ifdef PKG_PUBLISH_STAGE_AREA
+	/bin/bash publish-stage-area.sh
 else
-	echo "PKG_UPLOAD_RPMS not defined."
+	echo "PKG_PUBLISH_STAGE_AREA not defined."
+endif
+
+publish-rpm:
+ifdef PKG_PUBLISH_PACKAGES
+	/bin/bash publish-packages.sh
+else
+	echo "PKG_PUBLISH_PACKAGES not defined."
 endif
 
 clean:
