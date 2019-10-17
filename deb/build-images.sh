@@ -1,6 +1,6 @@
 #!/bin/bash
 set -ex
-tags=${tags:-"ubuntu1604"}
+tags=${tags:-"ubuntu1604 ubuntu1804"}
 
 for t in ${tags}; do
     docker build --pull=true \
