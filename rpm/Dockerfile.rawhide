@@ -7,7 +7,7 @@ RUN chmod +x /setup.sh
 
 RUN /setup.sh
 
-ADD Makefile build.sh setup-stage-area.sh upload-artifacts.sh /home/build/
+ADD Makefile build.sh setup-stage-area.sh publish-packages.sh publish-stage-area.sh /home/build/
 
 RUN sh /home/build/setup-stage-area.sh && \
   mkdir /packages && chown -R build:build /packages
