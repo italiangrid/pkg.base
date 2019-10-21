@@ -154,7 +154,7 @@ else
 	echo "PKG_STAGE_SRPMS not defined, do nothing..."
 endif
 
-rpm: stage-rpm
+rpm: sign-rpm
 
 publish-stage-area:
 ifdef PKG_PUBLISH_STAGE_AREA
@@ -168,6 +168,13 @@ ifdef PKG_PUBLISH_PACKAGES
 	/bin/bash publish-packages.sh
 else
 	echo "PKG_PUBLISH_PACKAGES not defined."
+endif
+
+sign-rpm: stage-rpm
+ifdef PKG_SIGN_PACKAGES
+	/bin/bash sign-packages.sh
+else
+	echo "PKG_SIGN_PACKAGES not defined."
 endif
 
 clean:

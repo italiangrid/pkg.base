@@ -15,7 +15,7 @@ mv /epel.repo /etc/yum.repos.d/
 
 yum -y update
 yum -y install make createrepo \
-  which wget rpm-build git tar apache-maven java-1.8.0-openjdk-devel \
+  which wget rpm-build rpm-sign expect git tar apache-maven java-1.8.0-openjdk-devel \
   redhat-rpm-config buildsys-macros \
   autoconf automake cmake gcc-c++ libtool sudo
 
