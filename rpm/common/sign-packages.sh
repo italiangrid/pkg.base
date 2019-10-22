@@ -10,8 +10,8 @@ for v in ${required_env}; do
     fi
 done
 
-gpg --import ${PKG_SIGN_PUB_KEY}
-gpg --allow-secret-key-import --import ${PKG_SIGN_PRI_KEY}
+gpg --import ${GPG_IMPORT_OPTS} ${PKG_SIGN_PUB_KEY}
+gpg --allow-secret-key-import --import ${GPG_IMPORT_OPTS} ${PKG_SIGN_PRI_KEY}
 gpg --list-keys
 
 packages=$(find /packages/${BUILD_PLATFORM} -type f -name '*.rpm')
