@@ -10,6 +10,8 @@ for v in ${required_env}; do
     fi
 done
 
+if [ "${PKG_SIGN_PACKAGES}" = "y" ]; then
+
 gpg --import ${GPG_IMPORT_OPTS} ${PKG_SIGN_PUB_KEY}
 gpg --allow-secret-key-import --import ${GPG_IMPORT_OPTS} ${PKG_SIGN_PRI_KEY}
 gpg --list-keys
@@ -30,5 +32,8 @@ EOF
   ./sign-rpms.exp
 done
 
+else
+  echo "PKG_SIGN_PACKGES is set but is not 'y'"
+fi
 
 echo "Done signing!"
