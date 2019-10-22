@@ -1,7 +1,7 @@
 #!/bin/bash
 set -ex
 
-required_env="PKG_SIGN_PACKAGES PKG_SIGN_KEY_PASSWORD BUILD_PLATFORM"
+required_env="PKG_SIGN_PACKAGES PKG_SIGN_KEY_PASSWORD PKG_SIGN_PUB_KEY PKG_SIGN_PRI_KEY BUILD_PLATFORM"
 
 for v in ${required_env}; do
     if [ ! -n "${!v}" ]; then
@@ -10,8 +10,8 @@ for v in ${required_env}; do
     fi
 done
 
-gpg --import $HOME/.pkg.gpg.public.key
-gpg --allow-secret-key-import --import $HOME/.pkg.gpg.private.key
+gpg --import ${PKG_SIGN_PUB_KEY}
+gpg --allow-secret-key-import --import ${PKG_SIGN_PRI_KEY}
 gpg --list-keys
 
 packages=$(find /packages/${BUILD_PLATFORM} -type f -name '*.rpm')
