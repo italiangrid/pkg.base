@@ -14,7 +14,7 @@ yum install -y hostname epel-release
 #mv /epel.repo /etc/yum.repos.d/
 
 yum -y update
-yum -y install make createrepo which wget rpm-build rpm-sign expect git \
+yum -y install make createrepo which wget rpm-build rpm-sign pinentry expect git \
   tar maven java-1.8.0-openjdk-devel redhat-rpm-config \
   autoconf automake cmake gcc-c++ libtool sudo
 
