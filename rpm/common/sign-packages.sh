@@ -10,6 +10,10 @@ for v in ${required_env}; do
     fi
 done
 
+gpg --import $HOME/.pkg.gpg.public.key
+gpg --allow-secret-key-import --import $HOME/.pkg.gpg.private.key
+gpg --list-keys
+
 packages=$(find /packages/${BUILD_PLATFORM} -type f -name '*.rpm')
 
 for p in ${packages}; do
