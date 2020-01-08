@@ -16,7 +16,7 @@ mv /epel.repo /etc/yum.repos.d/
 yum -y update
 yum -y install make createrepo \
   which wget rpm-build rpm-sign expect git tar apache-maven java-1.8.0-openjdk-devel \
-  redhat-rpm-config buildsys-macros \
+  redhat-rpm-config buildsys-macros rpmdevtools \
   autoconf automake cmake gcc-c++ libtool sudo
 
 # Disable require tty which prevents to run sudo naturally
