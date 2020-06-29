@@ -24,7 +24,6 @@ pipeline {
   }
   
   environment {
-    DOCKER_REGISTRY_HOST = "${env.DOCKER_REGISTRY_HOST}"
     PUSH_TO_DOCKERHUB = true
   }
 
