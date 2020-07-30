@@ -23,10 +23,6 @@ pipeline {
     cron('@daily')
   }
   
-  environment {
-    PUSH_TO_DOCKERHUB = true
-  }
-
   stages {
     stage('prepare'){
       steps {
