@@ -5,8 +5,10 @@ def build_image(dirname, tags){
     unstash "source"
 
     dir("${dirname}"){
-      sh "tags=${tags} sh build-images.sh"
-      sh "tags=${tags} sh push-images.sh"
+      withDockerRegistry([ credentialsId: "dockerhub-enrico", url: "" ]) {
+        sh "tags=${tags} sh build-images.sh"
+        sh "tags=${tags} sh push-images.sh"
+      }
     }
 }
 
@@ -23,11 +25,6 @@ pipeline {
     cron('@daily')
   }
   
-  environment {
-    DOCKER_REGISTRY_HOST = "${env.DOCKER_REGISTRY_HOST}"
-    PUSH_TO_DOCKERHUB = true
-  }
-
   stages {
     stage('prepare'){
       steps {
@@ -39,9 +36,7 @@ pipeline {
     stage('build images (1)'){
       steps {
         parallel(
-          "centos6"   : { build_image('rpm', 'centos6') },
           "centos7"   : { build_image('rpm', 'centos7') },
-          "centos6devtools7"  : { build_image('rpm', 'centos6devtools7') },
           "centos8"   : { build_image('rpm', 'centos8') },
           "ubuntu1604": { build_image('deb', 'ubuntu1604') } ,
           "ubuntu1804": { build_image('deb', 'ubuntu1804') }
