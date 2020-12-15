@@ -92,9 +92,12 @@ print-info:
 	@echo "Packaging $(name) fetched from $(git) for tag $(tag)"
 
 fetch-packaging:
+ifndef PKG_SKIP_FETCH_PACKAGING
 	@mkdir -p $(pkg_dir)
+	rm -rf "$(pkg_dir)/*"
 	git clone $(pkg_git) $(pkg_dir)/$(name)
 	cd $(pkg_dir)/$(name) && git checkout $(pkg_tag)
+endif
 
 fetch-sources: print-info
 	@mkdir -p $(source_dir)/$(name)
@@ -108,7 +111,9 @@ ifndef PKG_SKIP_SOURCE_TARBALL_CREATION
 endif
 
 prepare-sources: create-source-tarball
+ifndef PKG_SKIP_PREPARE_SOURCES
 	mv $(source_dir)/$(name)/$(tarball_name).gz $(source_dir)/$(tarball_name).gz
+endif
 
 pre-build:
 	if [ -r "$(prebuild_script)" ]; then pwd && sudo yum clean expire-cache && sudo -E bash -c "/bin/bash -ex $(prebuild_script)"; fi
@@ -121,7 +126,9 @@ prepare-rpm: prepare-spec
 		$(rpmbuild_dir)/SOURCES \
 		$(rpmbuild_dir)/SPECS \
 		$(rpmbuild_dir)/SRPMS
+ifndef PKG_SKIP_PREPARE_SOURCES
 	cp $(source_dir)/$(tarball_name).gz $(rpmbuild_dir)/SOURCES/$(tarball_name).gz
+endif
 
 setup-stage-area:
 	sudo -E bash -c '/bin/bash -ex setup-stage-area.sh'

@@ -1,0 +1,26 @@
+FROM  centos:7
+
+ENV BUILD_PLATFORM centos7java11
+
+ADD centos7java11/setup.sh centos7java11/settings.xml /
+RUN chmod +x /setup.sh
+
+ADD centos7java11/apache-maven.repo /centos7java11/gpfs.repo /etc/yum.repos.d/
+
+RUN /setup.sh
+
+ADD common/* /home/build/
+
+RUN sh /home/build/setup-stage-area.sh && \
+  mkdir /packages && chown -R build:build /packages
+
+WORKDIR /home/build
+
+VOLUME /m2-repository
+VOLUME /packages
+VOLUME /stage-area
+VOLUME /stage-area-source
+
+USER build
+
+CMD sh build.sh
