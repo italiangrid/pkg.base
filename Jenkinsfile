@@ -37,6 +37,7 @@ pipeline {
       steps {
         parallel(
           "centos7"   : { build_image('rpm', 'centos7') },
+          "centos7java11"   : { build_image('rpm', 'centos7java11') },
           "centos8"   : { build_image('rpm', 'centos8') },
           "ubuntu1604": { build_image('deb', 'ubuntu1604') } ,
           "ubuntu1804": { build_image('deb', 'ubuntu1804') }
