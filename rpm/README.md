@@ -14,6 +14,7 @@ The docker images build upon the following base docker images:
 - centos:centos5
 - centos:centos6
 - centos:centos7
+- quay.io/centos/centos:stream9
 - fedora:rawhide
 
 ### Building the images
@@ -37,6 +38,7 @@ The build process produces the following images:
 - italiangrid/pkg.base:centos5
 - italiangrid/pkg.base:centos6
 - italiangrid/pkg.base:centos7
+- italiangrid/pkg.base:centos9
 - italiangrid/pkg.base:rawhide
 
 ### Pushing the images to a local registry
