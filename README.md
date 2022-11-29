@@ -14,9 +14,6 @@ base packaging utilities used by middleware development group
 	- centos5
 	- centos6
 	- centos7
-	
-- DEB-based
-	- ubuntu1604
 
 ## Usage
 
