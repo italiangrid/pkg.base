@@ -5,7 +5,7 @@ def build_image(dirname, tags){
     unstash "source"
 
     dir("${dirname}"){
-      withDockerRegistry([ credentialsId: "dockerhub-enrico", url: "" ]) {
+      withDockerRegistry([ credentialsId: "docker-cnafsoftwaredevel", url: "" ]) {
         sh "tags=${tags} sh build-images.sh"
         sh "tags=${tags} sh push-images.sh"
       }
