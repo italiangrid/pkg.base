@@ -5,7 +5,7 @@ def build_image(dirname, tags){
     unstash "source"
 
     dir("${dirname}"){
-      withDockerRegistry([ credentialsId: "dockerhub-enrico", url: "" ]) {
+      withDockerRegistry([ credentialsId: "docker-cnafsoftwaredevel", url: "" ]) {
         sh "tags=${tags} sh build-images.sh"
         sh "tags=${tags} sh push-images.sh"
       }
@@ -39,10 +39,7 @@ pipeline {
           "centos7"   : { build_image('rpm', 'centos7') },
           "centos7java11"   : { build_image('rpm', 'centos7java11') },
           "centos7java17"   : { build_image('rpm', 'centos7java17') },
-          "centos8"   : { build_image('rpm', 'centos8') },
           "centos9"   : { build_image('rpm', 'centos9') },
-          "ubuntu1604": { build_image('deb', 'ubuntu1604') } ,
-          "ubuntu1804": { build_image('deb', 'ubuntu1804') }
           )
       }
     }
