@@ -1,0 +1,28 @@
+FROM quay.io/centos/centos:stream9
+
+ENV BUILD_PLATFORM centos9
+
+ADD centos9/setup.sh centos9/settings.xml /
+RUN chmod +x /setup.sh
+
+RUN /setup.sh
+
+ADD common/* /home/build/
+
+RUN sh /home/build/setup-stage-area.sh && \
+  mkdir /packages && chown -R build:build /packages
+
+WORKDIR /home/build
+
+VOLUME /m2-repository
+VOLUME /packages
+VOLUME /stage-area
+VOLUME /stage-area-source
+
+USER build
+
+ENV MAVEN_HOME="/opt/apache-maven-3.8.6"
+ENV M2_HOME="${MAVEN_HOME}"
+ENV PATH="${PATH}:${MAVEN_HOME}/bin"
+
+CMD sh build.sh

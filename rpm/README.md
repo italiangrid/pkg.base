@@ -12,6 +12,7 @@ There's a docker image for each supported build and packaging platform.
 The docker images build upon the following base docker images:
 
 - centos:centos7
+- quay.io/centos/centos:stream9
 - fedora:rawhide
 
 ### Building the images
@@ -33,6 +34,7 @@ The command above will build only the centos7 image.
 The build process produces the following images:
 
 - italiangrid/pkg.base:centos7
+- italiangrid/pkg.base:centos9
 - italiangrid/pkg.base:rawhide
 
 ### Pushing the images to a local registry

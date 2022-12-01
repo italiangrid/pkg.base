@@ -12,6 +12,7 @@ base packaging utilities used by middleware development group
 
 - RPM-based
 	- centos7
+	- centos9 (stream)
 
 ## Usage
 

@@ -38,7 +38,8 @@ pipeline {
         parallel(
           "centos7"   : { build_image('rpm', 'centos7') },
           "centos7java11"   : { build_image('rpm', 'centos7java11') },
-          "centos7java17"   : { build_image('rpm', 'centos7java17') }
+          "centos7java17"   : { build_image('rpm', 'centos7java17') },
+          "centos9"   : { build_image('rpm', 'centos9') },
           )
       }
     }
