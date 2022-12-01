@@ -1,3 +1,0 @@
-Defaults:build    !requiretty
-
-build ALL=(ALL) NOPASSWD: ALL
