@@ -23,11 +23,6 @@ yum install -y https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.r
 # install Maven 3.8.6
 curl -s http://mirrors.ibiblio.org/apache/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz | tar zx -C /opt
 
-cat > /etc/profile.d/apache-maven.csh <<'EOF'
-setenv MAVEN_HOME /opt/apache-maven-3.8.6
-setenv M2_HOME $MAVEN_HOME
-setenv PATH $M2_HOME/bin:$PATH
-EOF
 cat > /etc/profile.d/apache-maven.sh <<'EOF'
 export MAVEN_HOME=/opt/apache-maven-3.8.6
 export M2_HOME=$MAVEN_HOME
