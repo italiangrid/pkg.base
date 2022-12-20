@@ -42,6 +42,8 @@ cat > /etc/profile.d/java-home.sh <<'EOF'
 export JAVA_HOME=${java_home}
 EOF
 
+source /etc/profile.d/java-home.sh
+
 java -version
 javac -version
 mvn --version
