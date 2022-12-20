@@ -36,9 +36,16 @@ EOF
 
 source /etc/profile.d/apache-maven.sh
 
+java_home=$(dirname $(dirname $(readlink -f $(which javac))))
+
+cat > /etc/profile.d/java-home.sh <<'EOF'
+export JAVA_HOME=${java_home}
+EOF
+
 java -version
 javac -version
 mvn --version
+echo "JAVA_HOME = ${JAVA_HOME}"
 
 # Disable require tty which prevents to run sudo naturally
 # from jenkins, where we have no tty
