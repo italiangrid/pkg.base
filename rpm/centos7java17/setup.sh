@@ -22,7 +22,7 @@ wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.rpm
 rpm -ivh jdk-17_linux-x64_bin.rpm
 
 # install Maven 3.8.6
-wget http://mirrors.ibiblio.org/apache/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz -P /tmp
+wget https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.8.6/apache-maven-3.8.6-bin.tar.gz -P /tmp
 tar xf /tmp/apache-maven-3.8.6-bin.tar.gz -C /opt
 
 
