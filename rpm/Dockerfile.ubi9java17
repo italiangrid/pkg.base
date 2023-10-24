@@ -1,8 +1,8 @@
-FROM almalinux:9
+FROM redhat/ubi9
 
-ENV BUILD_PLATFORM almalinux9
+ENV BUILD_PLATFORM ubi9
 
-ADD almalinux9java17/setup.sh almalinux9java17/settings.xml /
+ADD ubi9java17/setup.sh ubi9java17/settings.xml /
 RUN chmod +x /setup.sh
 
 RUN /setup.sh
