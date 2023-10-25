@@ -11,13 +11,16 @@ echo "include_only=.garr.it,.cern.ch" >> /etc/yum/pluginconf.d/fastestmirror.con
 # Instal EPEL release
 dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
 
+# Install rpmdevtools
+dnf install -y https://rpmfind.net/linux/centos-stream/9-stream/AppStream/s390x/os/Packages/rpmdevtools-9.3-7.el9.noarch.rpm
+
 yum clean all
 yum install -y hostname
 
 yum -y update
 yum -y install make createrepo \
   which wget rpm-build rpm-sign expect git tar \
-  redhat-rpm-config rpmdevtools \
+  redhat-rpm-config \
   autoconf automake cmake gcc-c++ libtool sudo
 
 # install Java 17
