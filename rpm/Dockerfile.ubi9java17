@@ -1,4 +1,4 @@
-FROM registry.redhat.io/ubi9/ubi:latest
+FROM redhat/ubi9
 
 ENV BUILD_PLATFORM ubi9
 
