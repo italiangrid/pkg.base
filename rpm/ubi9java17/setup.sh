@@ -13,15 +13,18 @@ dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarc
 
 # Install rpmdevtools
 dnf install -y https://rpmfind.net/linux/centos-stream/9-stream/AppStream/s390x/os/Packages/rpmdevtools-9.3-7.el9.noarch.rpm
+# Install createrepo
+dnf install -y https://almalinux.pkgs.org/9/almalinux-appstream-x86_64/createrepo_c-0.20.1-1.el9.x86_64.rpm.html
+# Install rpm-sign
+dnf install -y https://almalinux.pkgs.org/9/almalinux-baseos-x86_64/rpm-sign-4.16.1.3-22.el9.x86_64.rpm.html
+# Install expect
+dnf install -y https://almalinux.pkgs.org/9/almalinux-appstream-x86_64/expect-5.45.4-15.el9.x86_64.rpm.html
 
 yum clean all
-yum install -y hostname
+yum install -y hostname make which wget rpm-build git tar redhat-rpm-config \
+  autoconf automake cmake gcc-c++ libtool sudo
 
 yum -y update
-yum -y install make createrepo \
-  which wget rpm-build rpm-sign expect git tar \
-  redhat-rpm-config \
-  autoconf automake cmake gcc-c++ libtool sudo
 
 # install Java 17
 yum install -y https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.rpm
