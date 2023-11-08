@@ -14,12 +14,14 @@ dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarc
 # Install rpmdevtools
 dnf install -y https://rpmfind.net/linux/centos-stream/9-stream/AppStream/s390x/os/Packages/rpmdevtools-9.3-7.el9.noarch.rpm
 # Install createrepo
-dnf install -y https://rpmfind.net/linux/centos-stream/9-stream/AppStream/s390x/os/Packages/createrepo_c-0.17.7-1.el9.s390x.rpm \
-               https://rpmfind.net/linux/centos-stream/9-stream/AppStream/s390x/os/Packages/createrepo_c-libs-0.17.7-1.el9.s390x.rpm
+dnf install -y https://rpmfind.net/linux/centos-stream/9-stream/AppStream/x86_64/os/Packages/createrepo_c-0.17.7-1.el9.x86_64.rpm \
+               https://rpmfind.net/linux/centos-stream/9-stream/AppStream/x86_64/os/Packages/createrepo_c-libs-0.17.7-1.el9.i686.rpm
 # Install rpm-sign
-dnf install -y https://rpmfind.net/linux/centos-stream/9-stream/BaseOS/s390x/os/Packages/rpm-sign-4.16.1.3-25.el9.s390x.rpm
+dnf install -y https://centos.pkgs.org/9-stream/centos-baseos-x86_64/rpm-sign-4.16.1.3-19.el9.x86_64.rpm.html \
+               https://centos.pkgs.org/9-stream/centos-baseos-x86_64/rpm-sign-libs-4.16.1.3-19.el9.i686.rpm.html
 # Install expect
-dnf install -y https://rpmfind.net/linux/centos-stream/9-stream/AppStream/s390x/os/Packages/expect-5.45.4-15.el9.s390x.rpm
+dnf install -y https://rpmfind.net/linux/centos-stream/9-stream/AppStream/x86_64/os/Packages/expect-5.45.4-15.el9.x86_64.rpm
+
 
 yum clean all
 yum install -y hostname make which wget rpm-build git tar redhat-rpm-config \
