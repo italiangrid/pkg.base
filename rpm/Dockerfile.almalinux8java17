@@ -1,0 +1,24 @@
+FROM almalinux:8
+
+ENV BUILD_PLATFORM almalinux8
+
+ADD almalinux8java17/setup.sh almalinux8java17/settings.xml /
+RUN chmod +x /setup.sh
+
+RUN /setup.sh
+
+ADD common/* /home/build/
+
+RUN sh /home/build/setup-stage-area.sh && \
+  mkdir /packages && chown -R build:build /packages
+
+WORKDIR /home/build
+
+VOLUME /m2-repository
+VOLUME /packages
+VOLUME /stage-area
+VOLUME /stage-area-source
+
+USER build
+
+CMD sh -l build.sh
