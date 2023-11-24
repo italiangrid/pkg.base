@@ -40,6 +40,7 @@ pipeline {
           "centos7java11"   : { build_image('rpm', 'centos7java11') },
           "centos7java17"   : { build_image('rpm', 'centos7java17') },
           "centos9"   : { build_image('rpm', 'centos9') },
+          "almalinux9java17"   : { build_image('rpm', 'almalinux9java17') },
           "ubi9java17"   : { build_image('rpm', 'ubi9java17') },
           )
       }
@@ -48,20 +49,6 @@ pipeline {
     stage('result'){
       steps {
         script { currentBuild.result = 'SUCCESS' }
-      }
-    }
-  }
-  
-  post {
-    failure {
-      slackSend color: 'danger', message: "${env.JOB_NAME} - #${env.BUILD_NUMBER} Failure (<${env.BUILD_URL}|Open>)"
-    }
-    
-    changed {
-      script{
-        if('SUCCESS'.equals(currentBuild.result)) {
-          slackSend color: 'good', message: "${env.JOB_NAME} - #${env.BUILD_NUMBER} Back to normal (<${env.BUILD_URL}|Open>)"
-        }
       }
     }
   }
