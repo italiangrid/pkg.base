@@ -41,8 +41,7 @@ pipeline {
           "centos7java17"   : { build_image('rpm', 'centos7java17') },
           "almalinux8java17"   : { build_image('rpm', 'almalinux8java17') },
           "centos9"   : { build_image('rpm', 'centos9') },
-          "almalinux9java17"   : { build_image('rpm', 'almalinux9java17') },
-          "ubi9java17"   : { build_image('rpm', 'ubi9java17') },
+          "almalinux9java17"   : { build_image('rpm', 'almalinux9java17') }
           )
       }
     }
