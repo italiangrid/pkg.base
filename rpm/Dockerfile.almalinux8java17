@@ -1,6 +1,6 @@
 FROM almalinux:8
 
-ENV BUILD_PLATFORM almalinux8
+ENV BUILD_PLATFORM almalinux8java17
 
 ADD almalinux8java17/setup.sh almalinux8java17/settings.xml /
 RUN chmod +x /setup.sh
