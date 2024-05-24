@@ -2,6 +2,7 @@ FROM almalinux:9
 
 ENV BUILD_PLATFORM almalinux9java17
 
+ADD almalinux9java17/gpfs.repo /etc/yum.repos.d/
 ADD almalinux9java17/setup.sh almalinux9java17/settings.xml /
 RUN chmod +x /setup.sh
 
