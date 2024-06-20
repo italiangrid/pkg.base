@@ -15,7 +15,7 @@ yum -y update
 yum -y install make createrepo \
   which wget rpm-build rpm-sign expect git tar \
   redhat-rpm-config rpmdevtools \
-  autoconf automake cmake gcc-c++ libtool sudo
+  autoconf automake cmake gcc-c++ libtool sudo doxygen
 
 # install Java 17
 yum install -y https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.rpm
