@@ -9,7 +9,9 @@ BUILD_USER_HOME=${BUILD_USER_HOME:-/home/${BUILD_USER}}
 echo "include_only=.garr.it,.cern.ch" >> /etc/yum/pluginconf.d/fastestmirror.conf
 
 yum clean all
-yum install -y hostname epel-release
+yum install -y hostname epel-release yum-utils
+
+yum-config-manager --enable crb
 
 yum -y update
 yum -y install make createrepo \
