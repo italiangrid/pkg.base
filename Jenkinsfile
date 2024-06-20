@@ -35,14 +35,15 @@ pipeline {
     
     stage('build images (1)'){
       steps {
-        parallel(
+        parallel (
           "centos7"   : { build_image('rpm', 'centos7') },
           "centos7java11"   : { build_image('rpm', 'centos7java11') },
           "centos7java17"   : { build_image('rpm', 'centos7java17') },
           "almalinux8java17"   : { build_image('rpm', 'almalinux8java17') },
           "centos9"   : { build_image('rpm', 'centos9') },
+          "almalinux9java11"   : { build_image('rpm', 'almalinux9java11') },
           "almalinux9java17"   : { build_image('rpm', 'almalinux9java17') }
-          )
+        )
       }
     }
     
