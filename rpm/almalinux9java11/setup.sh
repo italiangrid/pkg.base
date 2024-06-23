@@ -11,13 +11,19 @@ echo "include_only=.garr.it,.cern.ch" >> /etc/yum/pluginconf.d/fastestmirror.con
 yum clean all
 yum install -y hostname epel-release yum-utils
 
+# Enable CRB repository
 yum-config-manager --enable crb
+
+# Add UMD 5 repository for el9
+wget https://repository.egi.eu/repository/umd/5/al9/release/x86_64/umd-release-5.0.0-1.al9.alma.noarch.rpm
+yum localinstall -y umd-release-5.0.0-1.al9.alma.noarch.rpm
 
 yum -y update
 yum -y install make createrepo \
   which wget rpm-build rpm-sign expect git tar \
   redhat-rpm-config rpmdevtools \
-  autoconf automake cmake gcc-c++ libtool sudo doxygen
+  autoconf automake cmake gcc-c++ libtool sudo \
+  doxygen
 
 # install Java 11
 yum install -y java-11-openjdk-devel
