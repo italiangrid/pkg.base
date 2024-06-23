@@ -14,10 +14,6 @@ yum install -y hostname epel-release yum-utils wget git tar sudo
 # Enable CRB repository
 yum-config-manager --enable crb
 
-# Add UMD 5 repository for el9
-wget https://repository.egi.eu/repository/umd/5/al9/release/x86_64/umd-release-5.0.0-1.al9.alma.noarch.rpm
-yum localinstall -y umd-release-5.0.0-1.al9.alma.noarch.rpm
-
 yum -y update
 yum -y install make createrepo \
   which rpm-build rpm-sign expect \

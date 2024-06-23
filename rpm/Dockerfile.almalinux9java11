@@ -3,6 +3,10 @@ FROM almalinux:9
 ENV BUILD_PLATFORM almalinux9java11
 
 ADD almalinux9java11/gpfs.repo /etc/yum.repos.d/
+ADD almalinux9java11/umd5/umd-5-testing.repo /etc/yum.repos.d/
+ADD almalinux9java11/umd5/umd-5-contrib.repo /etc/yum.repos.d/
+ADD almalinux9java11/umd5/umd-5.repo /etc/yum.repos.d/
+
 ADD almalinux9java11/setup.sh almalinux9java11/settings.xml /
 RUN chmod +x /setup.sh
 
