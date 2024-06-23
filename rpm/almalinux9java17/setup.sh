@@ -9,7 +9,7 @@ BUILD_USER_HOME=${BUILD_USER_HOME:-/home/${BUILD_USER}}
 echo "include_only=.garr.it,.cern.ch" >> /etc/yum/pluginconf.d/fastestmirror.conf
 
 yum clean all
-yum install -y hostname epel-release yum-utils
+yum install -y hostname epel-release yum-utils wget git tar sudo
 
 # Enable CRB repository
 yum-config-manager --enable crb
@@ -20,9 +20,9 @@ yum localinstall -y umd-release-5.0.0-1.al9.alma.noarch.rpm
 
 yum -y update
 yum -y install make createrepo \
-  which wget rpm-build rpm-sign expect git tar \
+  which rpm-build rpm-sign expect \
   redhat-rpm-config rpmdevtools \
-  autoconf automake cmake gcc-c++ libtool sudo doxygen
+  autoconf automake cmake gcc-c++ libtool doxygen
 
 # install Java 17
 yum install -y https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.rpm
