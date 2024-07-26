@@ -13,7 +13,6 @@ dnf install -y hostname epel-release yum-utils
 dnf -y update
 
 dnf config-manager --enable powertools
-dnf config-manager --enable crb
 
 dnf -y install \
   autoconf \
