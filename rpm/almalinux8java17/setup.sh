@@ -8,17 +8,46 @@ BUILD_USER_HOME=${BUILD_USER_HOME:-/home/${BUILD_USER}}
 # Use only GARR and CERN mirrors
 echo "include_only=.garr.it,.cern.ch" >> /etc/yum/pluginconf.d/fastestmirror.conf
 
-yum clean all
-yum install -y hostname epel-release
+dnf clean all
+dnf install -y hostname epel-release
 
-yum -y update
-yum -y install make createrepo \
-  which wget rpm-build rpm-sign expect git tar \
-  redhat-rpm-config rpmdevtools \
-  autoconf automake cmake gcc-c++ libtool sudo
+dnf -y update
+dnf -y install \
+  autoconf \
+  autoconf-archive \
+  automake \
+  bear \
+  bison \
+  boost-devel \
+  CGSI-gSOAP-devel \
+  cmake \
+  createrepo \
+  diffutils \
+  doxygen \
+  expect \
+  file \
+  gcc-c++ \
+  gdb \
+  git \
+  globus-common-devel \
+  gsoap-devel \
+  libtool \
+  libuuid-devel \
+  make \
+  mariadb-devel \
+  openssl-devel \
+  redhat-rpm-config \
+  rpm-build \
+  rpm-sign \
+  rpmdevtools \
+  tar \
+  sudo \
+  wget \
+  which \
+  xmlrpc-c-devel
 
 # install Java 17
-yum install -y https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.rpm
+dnf install -y https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.rpm
 
 # install Maven 3.8.6
 curl -s https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.8.6/apache-maven-3.8.6-bin.tar.gz | tar zx -C /opt
