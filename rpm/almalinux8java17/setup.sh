@@ -18,7 +18,6 @@ dnf -y install \
   autoconf \
   autoconf-archive \
   automake \
-  bear \
   bison \
   boost-devel \
   CGSI-gSOAP-devel \
