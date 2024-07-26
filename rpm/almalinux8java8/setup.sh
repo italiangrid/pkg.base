@@ -8,6 +8,7 @@ BUILD_USER_HOME=${BUILD_USER_HOME:-/home/${BUILD_USER}}
 # Use only GARR and CERN mirrors
 echo "include_only=.garr.it,.cern.ch" >> /etc/yum/pluginconf.d/fastestmirror.conf
 
+yum config-manager --set-enabled powertools
 yum clean all
 yum install -y hostname epel-release
 
@@ -15,7 +16,7 @@ yum -y update
 yum -y install make createrepo \
   which wget rpm-build rpm-sign expect git tar \
   redhat-rpm-config rpmdevtools \
-  autoconf automake cmake gcc-c++ libtool sudo
+  autoconf automake cmake gcc-c++ libtool sudo doxygen
 
 # install Java 8
 yum install -y java-1.8.0-openjdk-devel
