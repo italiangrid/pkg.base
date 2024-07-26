@@ -9,9 +9,12 @@ BUILD_USER_HOME=${BUILD_USER_HOME:-/home/${BUILD_USER}}
 echo "include_only=.garr.it,.cern.ch" >> /etc/yum/pluginconf.d/fastestmirror.conf
 
 dnf clean all
-dnf install -y hostname epel-release
-
+dnf install -y hostname epel-release yum-utils
 dnf -y update
+
+dnf config-manager --enable powertools
+dnf config-manager --enable crb
+
 dnf -y install \
   autoconf \
   autoconf-archive \
@@ -43,8 +46,7 @@ dnf -y install \
   tar \
   sudo \
   wget \
-  which \
-  xmlrpc-c-devel
+  which
 
 # install Java 17
 dnf install -y https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.rpm

@@ -8,16 +8,45 @@ BUILD_USER_HOME=${BUILD_USER_HOME:-/home/${BUILD_USER}}
 # Use only GARR and CERN mirrors
 echo "include_only=.garr.it,.cern.ch" >> /etc/yum/pluginconf.d/fastestmirror.conf
 
-yum clean all
-yum install -y hostname epel-release yum-utils
+dnf clean all
+dnf install -y hostname epel-release yum-utils
+dnf -y update
 
-yum-config-manager --enable crb
+dnf config-manager --enable powertools
+dnf config-manager --enable crb
 
-yum -y update
-yum -y install make createrepo \
-  which wget rpm-build rpm-sign expect git tar \
-  redhat-rpm-config rpmdevtools \
-  autoconf automake cmake gcc-c++ libtool sudo doxygen
+dnf -y install \
+  autoconf \
+  autoconf-archive \
+  automake \
+  bear \
+  bison \
+  boost-devel \
+  CGSI-gSOAP-devel \
+  cmake \
+  createrepo \
+  diffutils \
+  doxygen \
+  expect \
+  file \
+  gcc-c++ \
+  gdb \
+  git \
+  globus-common-devel \
+  gsoap-devel \
+  libtool \
+  libuuid-devel \
+  make \
+  mariadb-devel \
+  openssl-devel \
+  redhat-rpm-config \
+  rpm-build \
+  rpm-sign \
+  rpmdevtools \
+  tar \
+  sudo \
+  wget \
+  which
 
 # install Java 8
 yum install -y java-1.8.0-openjdk-devel
