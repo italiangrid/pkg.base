@@ -37,7 +37,7 @@ pipeline {
       steps {
         parallel (
           "centos7java8"   : { build_image('rpm', 'centos7java8') },
-          // "centos7java11"   : { build_image('rpm', 'centos7java11') },
+          "centos7java11"   : { build_image('rpm', 'centos7java11') },
           // "centos7java17"   : { build_image('rpm', 'centos7java17') },
           "almalinux8java8"   : { build_image('rpm', 'almalinux8java8') },
           "almalinux8java17"   : { build_image('rpm', 'almalinux8java17') },

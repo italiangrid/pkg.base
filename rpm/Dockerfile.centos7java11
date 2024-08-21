@@ -5,7 +5,7 @@ ENV BUILD_PLATFORM centos7java11
 ADD centos7java11/setup.sh centos7java11/settings.xml /
 RUN chmod +x /setup.sh
 
-ADD centos7java11/apache-maven.repo /centos7java11/gpfs.repo /etc/yum.repos.d/
+ADD centos7java11/apache-maven.repo centos7java11/gpfs.repo centos7java11/CentOS-Base.repo centos7java11/epel.repo /etc/yum.repos.d/
 
 RUN /setup.sh
 
