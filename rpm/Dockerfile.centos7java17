@@ -26,5 +26,6 @@ USER build
 ENV MAVEN_HOME="/opt/apache-maven-3.8.6"
 ENV M2_HOME="${MAVEN_HOME}"
 ENV PATH="${PATH}:${MAVEN_HOME}/bin"
+ENV JAVA_HOME="${JAVA_HOME}"
 
 CMD sh build.sh
