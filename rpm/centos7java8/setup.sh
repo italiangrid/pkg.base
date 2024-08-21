@@ -29,6 +29,14 @@ mvn --version
 update-alternatives --set java $(realpath /usr/lib/jvm/java-1.8.0-openjdk/jre/bin/java)
 update-alternatives --set javac $(realpath /usr/lib/jvm/java-1.8.0-openjdk/bin/javac)
 
+java_home=$(dirname $(dirname $(readlink -f $(which javac))))
+
+cat > /etc/profile.d/java-home.sh <<EOF
+export JAVA_HOME=${java_home}
+EOF
+
+source /etc/profile.d/java-home.sh
+
 # Add build user to the sudoers
 echo '%wheel ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 adduser --uid ${BUILD_USER_UID} ${BUILD_USER}
