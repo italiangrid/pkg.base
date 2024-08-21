@@ -5,7 +5,7 @@ ENV BUILD_PLATFORM centos7java11
 ADD centos7java11/setup.sh centos7java11/settings.xml /
 RUN chmod +x /setup.sh
 
-ADD centos7java11/apache-maven.repo centos7java11/gpfs.repo centos7java11/CentOS-Base.repo centos7java11/epel.repo /etc/yum.repos.d/
+ADD centos7java11/apache-maven.repo centos7java11/gpfs.repo centos7java11/CentOS-Base.repo /etc/yum.repos.d/
 
 RUN /setup.sh
 
@@ -22,5 +22,9 @@ VOLUME /stage-area
 VOLUME /stage-area-source
 
 USER build
+
+ENV MAVEN_HOME="/opt/apache-maven-3.8.6"
+ENV M2_HOME="${MAVEN_HOME}"
+ENV PATH="${PATH}:${MAVEN_HOME}/bin"
 
 CMD sh build.sh

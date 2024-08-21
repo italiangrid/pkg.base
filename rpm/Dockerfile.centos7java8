@@ -1,12 +1,11 @@
-FROM  centos:centos7
+FROM  centos:7
 
 ENV BUILD_PLATFORM centos7java8
 
 ADD centos7java8/setup.sh centos7java8/settings.xml /
 RUN chmod +x /setup.sh
 
-ADD centos7java8/apache-maven.repo centos7java8/gpfs.repo centos7java8/CentOS-Base.repo centos7java8/*.local.mirror /etc/yum.repos.d/
-ADD centos7java8/epel.repo /
+ADD centos7java8/apache-maven.repo centos7java8/gpfs.repo centos7java8/CentOS-Base.repo /etc/yum.repos.d/
 
 RUN /setup.sh
 
