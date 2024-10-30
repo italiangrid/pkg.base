@@ -33,9 +33,13 @@ pipeline {
       }
     }
     
-    stage('build images (1)'){
+    stage('build base images') {
       steps {
         build_image('rpm', 'almalinux9base')
+      }
+    }
+    stage('build parallel images'){
+      steps {
         parallel (
           // "centos7java8"   : { build_image('rpm', 'centos7java8') },
           // "centos7java11"   : { build_image('rpm', 'centos7java11') },
