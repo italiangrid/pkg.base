@@ -1,0 +1,23 @@
+FROM almalinux:9
+
+ENV BUILD_PLATFORM almalinux9base
+
+ADD almalinux9base/gpfs.repo /etc/yum.repos.d/
+ADD almalinux9base/umd5/umd-5-testing.repo /etc/yum.repos.d/
+ADD almalinux9base/umd5/umd-5-contrib.repo /etc/yum.repos.d/
+ADD almalinux9base/umd5/umd-5.repo /etc/yum.repos.d/
+
+ADD almalinux9base/base.sh almalinux9base/settings.xml /
+RUN chmod +x /base.sh
+
+RUN /base.sh
+
+ADD common/* /home/build/
+
+RUN sh /home/build/setup-stage-area.sh && \
+  mkdir /packages && chown -R build:build /packages
+
+VOLUME /m2-repository
+VOLUME /packages
+VOLUME /stage-area
+VOLUME /stage-area-source

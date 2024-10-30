@@ -35,15 +35,15 @@ pipeline {
     
     stage('build images (1)'){
       steps {
+        build_image('rpm', 'almalinux9base')
         parallel (
-          "centos7java8"   : { build_image('rpm', 'centos7java8') },
-          "centos7java11"   : { build_image('rpm', 'centos7java11') },
-          // "centos7java17"   : { build_image('rpm', 'centos7java17') },
-          "almalinux8java8"   : { build_image('rpm', 'almalinux8java8') },
-          "almalinux8java17"   : { build_image('rpm', 'almalinux8java17') },
-          // "centos9"   : { build_image('rpm', 'centos9') },
-          "almalinux9java8"   : { build_image('rpm', 'almalinux9java8') },
-          "almalinux9java11"   : { build_image('rpm', 'almalinux9java11') },
+          // "centos7java8"   : { build_image('rpm', 'centos7java8') },
+          // "centos7java11"   : { build_image('rpm', 'centos7java11') },
+          // // "centos7java17"   : { build_image('rpm', 'centos7java17') },
+          // "almalinux8java8"   : { build_image('rpm', 'almalinux8java8') },
+          // "almalinux8java17"   : { build_image('rpm', 'almalinux8java17') },
+          // "almalinux9java8"   : { build_image('rpm', 'almalinux9java8') },
+          // "almalinux9java11"   : { build_image('rpm', 'almalinux9java11') },
           "almalinux9java17"   : { build_image('rpm', 'almalinux9java17') }
         )
       }
