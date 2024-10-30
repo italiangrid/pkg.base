@@ -47,7 +47,7 @@ dnf -y install \
   which
 
 # install Java 17
-dnf install -y https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.rpm
+dnf install -y java-17-openjdk-devel
 
 # install Maven 3.8.6
 curl -s https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.8.6/apache-maven-3.8.6-bin.tar.gz | tar zx -C /opt
