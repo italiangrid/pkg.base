@@ -6,5 +6,5 @@ docker_opts=${docker_opts:-"--rm=true --no-cache=true"}
 for t in ${tags}; do
     docker build \
       ${docker_opts} \
-      -t cnafsd/pkg.base:${t} -f Dockerfile.${t} .
+      -t italiangrid/pkg.base:${t} -f Dockerfile.${t} .
 done

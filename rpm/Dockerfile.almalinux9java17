@@ -1,4 +1,4 @@
-FROM cnafsd/pkg.base:almalinux9base
+FROM italiangrid/pkg.base:almalinux9base
 
 ENV BUILD_PLATFORM almalinux9java17
 
