@@ -1,7 +1,0 @@
-[UMD-5-testing]
-name=UMD 5 testing (Alma Linux 9)
-baseurl=https://repository.egi.eu/repository/umd/5/al9/testing/$basearch
-enabled=0
-priority=1
-gpgcheck=1
-gpgkey=https://repository.egi.eu/repository/umd/5/UMD-5-RPM-PGP-KEY

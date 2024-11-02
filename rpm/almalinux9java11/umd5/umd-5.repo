@@ -1,7 +1,0 @@
-[UMD-5]
-name=UMD 5 main repository (Alma Linux 9 )
-baseurl=https://repository.egi.eu/repository/umd/5/al9/release/$basearch
-enabled=1
-priority=1
-gpgcheck=1
-gpgkey=https://repository.egi.eu/repository/umd/5/UMD-5-RPM-PGP-KEY

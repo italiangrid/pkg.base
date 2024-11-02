@@ -1,28 +1,13 @@
-FROM almalinux:9
+FROM italiangrid/pkg.base:almalinux9base
 
 ENV BUILD_PLATFORM almalinux9java11
 
-ADD almalinux9java11/gpfs.repo /etc/yum.repos.d/
-ADD almalinux9java11/umd5/umd-5-testing.repo /etc/yum.repos.d/
-ADD almalinux9java11/umd5/umd-5-contrib.repo /etc/yum.repos.d/
-ADD almalinux9java11/umd5/umd-5.repo /etc/yum.repos.d/
-
-ADD almalinux9java11/setup.sh almalinux9java11/settings.xml /
+ADD almalinux9java11/setup.sh /
 RUN chmod +x /setup.sh
 
 RUN /setup.sh
 
-ADD common/* /home/build/
-
-RUN sh /home/build/setup-stage-area.sh && \
-  mkdir /packages && chown -R build:build /packages
-
 WORKDIR /home/build
-
-VOLUME /m2-repository
-VOLUME /packages
-VOLUME /stage-area
-VOLUME /stage-area-source
 
 USER build
 
