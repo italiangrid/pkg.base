@@ -11,9 +11,7 @@ drives the packaging process.
 There's a docker image for each supported build and packaging platform.
 The docker images build upon the following base docker images:
 
-- centos:centos7
-- quay.io/centos/centos:stream9
-- fedora:rawhide
+- almalinux:9
 
 ### Building the images
 
@@ -26,16 +24,14 @@ sh build-images.sh
 To build only a single tag, use the `tags` bash variable:
 
 ```bash
-tags=centos7 sh build-images.sh
+tags=almalinux9java17 sh build-images.sh
 ```
 
-The command above will build only the centos7 image.
+The command above will build only the almalinux9java17 image.
 
 The build process produces the following images:
 
-- italiangrid/pkg.base:centos7
-- italiangrid/pkg.base:centos9
-- italiangrid/pkg.base:rawhide
+- italiangrid/pkg.base:almalinux9java17
 
 ### Pushing the images to a local registry
 
